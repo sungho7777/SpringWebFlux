@@ -5,6 +5,7 @@ import com.example.webflux.model.user.chat.UserChatResponseDto;
 import com.example.webflux.service.user.chat.UserChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -18,5 +19,11 @@ public class UserChatController {
     public Mono<UserChatResponseDto> onShotChat(@RequestBody UserChatRequestDto userChatRequestDto){
 
         return userChatService.getOneShotChat(userChatRequestDto);
+    }
+
+    @PostMapping("/oneshot/stream")
+    public Flux<UserChatResponseDto> onShotChatStream(@RequestBody UserChatRequestDto userChatRequestDto){
+
+        return userChatService.getOneShotChatStream(userChatRequestDto);
     }
 }

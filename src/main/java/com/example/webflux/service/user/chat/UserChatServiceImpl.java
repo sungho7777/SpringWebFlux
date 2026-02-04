@@ -9,6 +9,7 @@ import com.example.webflux.model.user.chat.UserChatResponseDto;
 import com.example.webflux.service.llmclient.LlmWebClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -25,5 +26,13 @@ public class UserChatServiceImpl implements UserChatService{
         Mono<LlmChatResponseDto> chatCompletionMono = llmWebClientServiceMap.get(userChatRequestDto.getLlmModel().getLlmType())
                 .getChatCompletion(llmChatRequestDto);
         return chatCompletionMono.map(UserChatResponseDto::new);
+    }
+
+    @Override
+    public Flux<UserChatResponseDto> getOneShotChatStream(UserChatRequestDto userChatRequestDto) {
+        LlmChatRequestDto llmChatRequestDto = new LlmChatRequestDto(userChatRequestDto, "요청에 적절히 응답해주세요.");
+        Flux<LlmChatResponseDto> chatCompletionFlux = llmWebClientServiceMap.get(userChatRequestDto.getLlmModel().getLlmType())
+                .getChatCompletionStream(llmChatRequestDto);
+        return chatCompletionFlux.map(UserChatResponseDto::new);
     }
 }
