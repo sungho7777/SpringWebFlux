@@ -1,6 +1,5 @@
 package com.example.webflux.service.llmclient;
 
-import com.example.webflux.exception.CommonError;
 import com.example.webflux.exception.CustomErrorType;
 import com.example.webflux.exception.ErrorTypeException;
 import com.example.webflux.model.llmclient.LlmChatRequestDto;
@@ -9,7 +8,7 @@ import com.example.webflux.model.llmclient.LlmType;
 import com.example.webflux.model.llmclient.gemini.request.GeminiChatRequestDto;
 import com.example.webflux.model.llmclient.gemini.response.GeminiChatResponseDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-@Log4j2
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GeminiWebClientService implements LlmWebClientService{

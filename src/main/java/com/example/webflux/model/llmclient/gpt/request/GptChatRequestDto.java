@@ -27,7 +27,7 @@ public class GptChatRequestDto implements Serializable {
 
     public GptChatRequestDto(LlmChatRequestDto llmChatRequestDto){
         if(llmChatRequestDto.isUseJson()){
-            this.response_format = new GptResponseFormat("json-object");
+            this.response_format = new GptResponseFormat("json_object");
         }
         this.messages = List.of(
                 new GptCompletionRequestDto(GptMessageRole.SYSTEM, llmChatRequestDto.getSystemPrompt())

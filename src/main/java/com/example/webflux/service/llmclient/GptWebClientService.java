@@ -8,7 +8,7 @@ import com.example.webflux.model.llmclient.LlmType;
 import com.example.webflux.model.llmclient.gpt.request.GptChatRequestDto;
 import com.example.webflux.model.llmclient.gpt.response.GptChatResponseDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
-@Log4j2
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GptWebClientService implements LlmWebClientService{
